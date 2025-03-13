@@ -20,6 +20,7 @@ public class BossAI : MonoBehaviour
     private Vector3 targetPosition;
     private Vector2 minScreenBounds, maxScreenBounds;
     private bool isEnraged = false; // Trạng thái cuồng nộ
+    private bool isDying = false; // Cờ trạng thái boss đang chết
     private SpriteRenderer spriteRenderer;
 
     void Start()
@@ -86,8 +87,10 @@ public class BossAI : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector3 hitPosition)
     {
+        if (isDying) return; // Nếu đang chết thì không nhận thêm damage
+
         currentHealth -= damage;
         healthBar.value = currentHealth;
 
@@ -97,11 +100,13 @@ public class BossAI : MonoBehaviour
         {
             EnterRageMode();
         }
+
         if (currentHealth <= 0)
         {
-            Die();
+            StartCoroutine(ExplodeBoss(hitPosition));
         }
     }
+
 
     void EnterRageMode()
     {
@@ -130,12 +135,48 @@ public class BossAI : MonoBehaviour
         }
     }
 
-    void Die()
+    // Hiệu ứng nổ từ vị trí va chạm
+    IEnumerator ExplodeBoss(Vector3 hitPosition)
     {
+        Debug.Log("💥 Boss sắp nổ tung!");
+        isDying = true; // Đánh dấu boss đã bắt đầu chết
+
+        // Dừng di chuyển & bắn bằng cách không cho phép boss thực hiện các hành động khác
+        moveSpeed = 0;
+        
+        // Hiệu ứng nhấp nháy đỏ khi chết
+        StartCoroutine(FlashRedEffect());
+
+        // Tạo vụ nổ ban đầu từ vị trí viên đạn va chạm
         if (explosionEffect != null)
         {
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            Instantiate(explosionEffect, hitPosition, Quaternion.identity);
         }
+
+        float duration = 2f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            Vector3 randomExplosionPosition = new Vector3(
+                transform.position.x + Random.Range(-1.5f, 1.5f),
+                transform.position.y + Random.Range(-1.5f, 1.5f),
+                transform.position.z
+            );
+
+            Instantiate(explosionEffect, randomExplosionPosition, Quaternion.identity);
+            yield return new WaitForSeconds(0.2f); // Giảm thời gian giữa các vụ nổ
+            elapsedTime += 0.2f;
+        }
+
+        // Vụ nổ cuối cùng, lớn hơn
+        if (explosionEffect != null)
+        {
+            GameObject bigExplosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            bigExplosion.transform.localScale = new Vector3(3f, 3f, 3f);
+        }
+
+        yield return new WaitForSeconds(0.3f);
 
         Destroy(gameObject);
         Destroy(healthBarUI.gameObject);
@@ -146,7 +187,7 @@ public class BossAI : MonoBehaviour
         if (collision.CompareTag("PlayerBulletTag"))
         {
             Debug.Log("💥 Boss bị bắn trúng! Mất 100 HP.");
-            TakeDamage(100);
+            TakeDamage(100, collision.transform.position); // Truyền vị trí viên đạn
             Destroy(collision.gameObject);
         }
 
@@ -156,4 +197,5 @@ public class BossAI : MonoBehaviour
             collision.GetComponent<PlayerController>()?.TakeDamage(2);
         }
     }
+
 }

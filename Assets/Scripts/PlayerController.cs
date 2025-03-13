@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject ExplosionGO; // Explosion prefab
     public GameManager gameOver;
     public GameManager HP;
-
+    public GameObject collisionEffectPrefab;
     public float currentHP;
     public float maxHP = 10;
     public float speed;
@@ -75,28 +75,49 @@ public class PlayerController : MonoBehaviour
     {
         if (col.CompareTag("EnemyShipTag") || col.CompareTag("EnemyBulletTag"))
         {
-            TakeDamage(2f); // Player mất 2 HP khi bị bắn trúng
+            TakeDamage(2f);
             PlayExplosion();
         }
 
         if (col.CompareTag("Boss")) // 🔥 Va chạm Boss, mất 2 HP
         {
             Debug.Log("🔥 Player va chạm với Boss, mất 2 HP!");
+
+            // Xác định hướng va chạm
+            Vector2 collisionDirection = (transform.position - col.transform.position).normalized;
+
+            // Tạo hiệu ứng tại điểm va chạm
+            Vector3 hitPosition = (transform.position + col.transform.position) / 2;
+            CreateCollisionEffect(hitPosition);
+
+            // Đẩy tàu lùi lại
+            StartCoroutine(Knockback(collisionDirection, 0.3f, 2f));
+
             TakeDamage(2f);
         }
 
-        // Xử lý khi va chạm với thiên thạch (Meteor)
         if (col.CompareTag("Meteor"))
         {
-            StartCoroutine(FreezePlayer(2f)); // Player đứng im 2 giây
+            StartCoroutine(FreezePlayer(2f)); 
         }
 
-        // Xử lý khi va chạm với thiên thạch loại 2 (Meteor2)
         if (col.CompareTag("Meteor2"))
         {
-            StartCoroutine(FreezePlayer(3f)); // Player đứng im 3 giây
+            StartCoroutine(FreezePlayer(3f)); 
         }
     }
+
+
+
+    void CreateCollisionEffect(Vector3 position)
+    {
+        if (collisionEffectPrefab != null)
+        {
+            GameObject effect = Instantiate(collisionEffectPrefab, position, Quaternion.identity);
+            Destroy(effect, 0.5f); // Xóa sau 0.5s để tránh rác bộ nhớ
+        }
+    }
+
 
     IEnumerator FreezePlayer(float duration)
     {
@@ -119,6 +140,22 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    IEnumerator Knockback(Vector2 direction, float duration, float force)
+    {
+        float timer = 0;
+        canMove = false; // Tạm thời vô hiệu hóa di chuyển
+
+        while (timer < duration)
+        {
+            transform.position += (Vector3)direction * force * Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        canMove = true; // Cho phép di chuyển lại
+    }
+
 
     void PlayExplosion()
     {

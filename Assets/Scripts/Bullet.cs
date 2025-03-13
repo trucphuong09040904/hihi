@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour
             BossAI boss = collision.GetComponent<BossAI>();
             if (boss != null)
             {
-                boss.TakeDamage(damage);
+                boss.TakeDamage(damage, transform.position);
                 GameScore.instance.AddScore(100);
             }
             Destroy(gameObject);
