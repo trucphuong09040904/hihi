@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.31375003, y: 0.20666797}
   m_AnchorMax: {x: 0.665, y: 0.7264991}
-  m_AnchoredPosition: {x: 4.9299927, y: -5.5200195}
+  m_AnchoredPosition: {x: 4.9299927, y: -5.5200043}
   m_SizeDelta: {x: 16.53003, y: 16.019989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &36000197
@@ -1681,7 +1681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.16800001, y: 0.69577813}
   m_AnchorMax: {x: 0.81845707, y: 0.87882704}
-  m_AnchoredPosition: {x: -2.5200195, y: 2.5899963}
+  m_AnchoredPosition: {x: -2.5200348, y: 2.5899963}
   m_SizeDelta: {x: -2.2900085, y: -5.3700027}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1278803651
@@ -2022,6 +2022,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9115890787716327149, guid: b0623cb6be7b4cb4f8da9aab50a99c02, type: 3}
+      propertyPath: m_Size.x
+      value: 0.45870605
+      objectReference: {fileID: 0}
+    - target: {fileID: -9115890787716327149, guid: b0623cb6be7b4cb4f8da9aab50a99c02, type: 3}
+      propertyPath: m_Size.y
+      value: 0.594579
+      objectReference: {fileID: 0}
+    - target: {fileID: -9115890787716327149, guid: b0623cb6be7b4cb4f8da9aab50a99c02, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0052259415
+      objectReference: {fileID: 0}
+    - target: {fileID: -9115890787716327149, guid: b0623cb6be7b4cb4f8da9aab50a99c02, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.041806996
+      objectReference: {fileID: 0}
     - target: {fileID: -9023268110607155727, guid: b0623cb6be7b4cb4f8da9aab50a99c02, type: 3}
       propertyPath: HP
       value: 
@@ -2054,6 +2070,10 @@ PrefabInstance:
       propertyPath: bulletPosition02
       value: 
       objectReference: {fileID: 1786692221}
+    - target: {fileID: -9023268110607155727, guid: b0623cb6be7b4cb4f8da9aab50a99c02, type: 3}
+      propertyPath: collisionEffectPrefab
+      value: 
+      objectReference: {fileID: 6309443516261151039, guid: 14292a4dbb688ea4d8183c8e782c59fb, type: 3}
     - target: {fileID: 1587078856420153946, guid: b0623cb6be7b4cb4f8da9aab50a99c02, type: 3}
       propertyPath: m_Name
       value: PlayerGO
@@ -2616,7 +2636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32335743, y: 0.19972335}
   m_AnchorMax: {x: 0.6922715, y: 0.4033372}
-  m_AnchoredPosition: {x: 1.0899963, y: 0.9999695}
+  m_AnchoredPosition: {x: 1.0899963, y: 0.99998474}
   m_SizeDelta: {x: 17.75, y: 2.2699966}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1858154244
@@ -2919,7 +2939,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.005313039, y: -0.056759834}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2930,7 +2950,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 5}
+  m_Size: {x: 4.236828, y: 4.4637737}
   m_EdgeRadius: 0
 --- !u!50 &1951053039
 Rigidbody2D:

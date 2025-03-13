@@ -5,30 +5,21 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     float speed;
-    // Start is called before the first frame update
+    public GameObject explosionEffect; // Hiệu ứng nổ
+
     void Start()
     {
         speed = 8f;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Get the bullet's current position
         Vector2 position = transform.position;
-
-        //compute the bullet's new position
         position = new Vector2(position.x, position.y + speed * Time.deltaTime);
-
-        //update the bullet's position
         transform.position = position;
 
-        //this is the top-right point of the screen
         Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-
-        //if the bullet went outside the screen on the top, then destry the bullet
-
-        if(transform.position.y > max.y)
+        if (transform.position.y > max.y)
         {
             Destroy(gameObject);
         }
@@ -36,10 +27,31 @@ public class PlayerBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        //detect collision of the player bullet with an enemy ship
-        if (col.tag == "EnemyShipTag") 
+        if (col.CompareTag("EnemyShipTag")) 
         {
-            Destroy(gameObject); //destroy this player bullet
+            if (explosionEffect != null)
+            {
+                Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            }
+            Destroy(gameObject);
+        }
+
+        if (col.CompareTag("Boss")) 
+        {
+            if (explosionEffect != null)
+            {
+                Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            }
+
+            // Gọi TakeDamage bên Boss, truyền vị trí va chạm
+            BossAI boss = col.GetComponent<BossAI>();
+            if (boss != null)
+            {
+                boss.TakeDamage(100, transform.position);
+            }
+
+            Destroy(gameObject);
         }
     }
+
 }
