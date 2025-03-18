@@ -48,9 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de289428bb737c4fa90f5209f75a8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletClonePrefab: {fileID: 5597576471314221234, guid: 18c025cd2152a3a40aab9508f97dce79, type: 3}
+  moveSpeed: 1.5
+  moveRange: 2.96
+  shootInterval: 3
+  bulletPrefab: {fileID: 0}
   firePoint: {fileID: 3167058336148931529}
-  fireRate: 2.5
 --- !u!212 &8597791802527873741
 SpriteRenderer:
   m_ObjectHideFlags: 0

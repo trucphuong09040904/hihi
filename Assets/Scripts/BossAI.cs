@@ -91,7 +91,7 @@ public class BossAI : MonoBehaviour
         currentHealth -= damage;
         healthBar.value = currentHealth;
 
-        GameScore.instance.AddScore(100);
+        GameScore.instance.AddScore(25);
 
         if (currentHealth <= 2000 && !isEnraged)
         {

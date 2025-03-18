@@ -21,6 +21,7 @@ public class GameScore : MonoBehaviour
     public int targetScore4 = 4000;
     public int targetScore5 = 5000;
     public int targetScore6 = 6000;
+    public int targetScore7 = 7000;
 
     public string scene1 = "PlayScene";
     public string scene2 = "PlayScene 1";
@@ -28,6 +29,7 @@ public class GameScore : MonoBehaviour
     public string scene4 = "PlayScene 3";
     public string scene5 = "PlayScene 4";
     public string scene6 = "PlayScene 5";
+    public string scene7 = "PlayScene 6";
 
     public int Score
     {
@@ -99,6 +101,10 @@ public class GameScore : MonoBehaviour
         else if (currentScene == scene5 && score >= targetScore5)
         {
             LoadNextScene(scene6);
+        }
+        else if (currentScene == scene6 && score >= targetScore6)
+        {
+            LoadNextScene(scene7);
         }
     }
 
