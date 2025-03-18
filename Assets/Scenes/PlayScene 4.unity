@@ -671,8 +671,8 @@ GameObject:
   m_Component:
   - component: {fileID: 439620409}
   - component: {fileID: 439620411}
-  - component: {fileID: 439620410}
   - component: {fileID: 439620412}
+  - component: {fileID: 439620410}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -811,15 +811,17 @@ MonoBehaviour:
   targetScore1: 1000
   targetScore2: 2000
   targetScore3: 3000
-  targetScore4: 200
-  targetScore5: 200
-  targetScore6: 200
+  targetScore4: 4000
+  targetScore5: 5000
+  targetScore6: 6000
+  targetScore7: 7000
   scene1: PlayScene
   scene2: PlayScene 1
   scene3: PlayScene 2
   scene4: PlayScene 3
   scene5: PlayScene 4
   scene6: PlayScene 5
+  scene7: PlayScene 6
 --- !u!1 &447500066
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,7 +2765,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.22529618}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.065002, y: 11.130003}
+  m_AnchoredPosition: {x: 10.065002, y: 11.130002}
   m_SizeDelta: {x: 20.130005, y: 25.330002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1917108030
@@ -2914,7 +2916,7 @@ MonoBehaviour:
   maxHealth: 5000
   healthBar: {fileID: 342737530}
   healthBarUI: {fileID: 342737529}
-  explosionEffect: {fileID: 0}
+  explosionEffect: {fileID: 1807812276749309951, guid: 8c1aa665e4e6b524fa4f2ae55ebdf5d9, type: 3}
 --- !u!61 &1951053038
 BoxCollider2D:
   m_ObjectHideFlags: 0
